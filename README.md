@@ -45,7 +45,7 @@ This solution is scalable and can be enhanced with more sensors and devices to d
 - Visualization happens via AWS Amplify and a Lambda function to build a simple web interface.
 
 ## Instructions
-### Steg 1: Downloads
+### Steg 1: Installation and Configuration
 1. Install Arduino IDE:
 	- Download and install the latest version of the Arduino IDE.
 2. Install Libraries:
@@ -56,27 +56,42 @@ This solution is scalable and can be enhanced with more sensors and devices to d
 	- Install an MQTT broker such as Mosquitto on your Raspberry Pi.
 4. Install AWS CLI and IoT Core SDK:
 	- Follow the AWS IoT Core documentation to configure and install the AWS CLI.
+5. 
 
-### Steg 2: Connectivity
+### Steg 2: Wiring
 
 ![Arduino and DHT11 Setup](img/Arduino_DHT11_Setup.png)
-
-1. Koppla DHT11 till Arduino Uno R4 WiFi:
-	- VCC to 5V.
-	- SDA to pin 2.
-	- GND to GND.
-2. Configure MQTT in Arduino Code:
+Connect to the DHT11 to the Arduino Uno R4 WiFi as follow:
+	- VCC → 5V on Arduino
+	- SDA → Pin 2 on Arduino
+	 - GND → GND on Arduino
+  
+### Step 3: Connectivity
+1. Configure MQTT in Arduino Code:
 	- In main.ino, configure your MQTT server (Raspberry Pi’s IP address) and Wi-Fi settings (SSID and password).
 	- Use the PubSubClient library to connect to the MQTT server and publish temperature and humidity data.
 
 ![Raspberry Pi](img/Raspberry_pi.png)
 
-3. Configure MQTT Broker on Raspberry Pi:
+2. Configure MQTT Broker on Raspberry Pi:
 	- Install Mosquitto and configure it to listen for incoming MQTT messages from the Arduino.
+	```
+	sudo apt-get update  
+	sudo apt-get install mosquitto mosquitto-clients 
+	```
+	- Configure the MQTT broker for the local network.
+ 	- Use the following configuration in main.ino
+    	```
+     	mqtt_server = "192.168.x.x"; // Replace with Raspberry Pi IP address 
+     	```
 	- Create subscriptions for the specific topics published by the Arduino.
-4. AWS IoT Core Configuration:
+5. AWS IoT Core Configuration:
+	- Set up AWS IoT Core
 	- Create an IoT thing and obtain the necessary certificates and keys.
+	- Create a DynamoDB Table to store the data
 	- Use AWS IoT Core to create a rule that publishes sensor data to DynamoDB when MQTT messages are received.
+	- Configure a Lambda function for data handling
+ 	- Deploy a website using AWS Amplify
 
 ### Steg 3: Statistik och Dataanalys
 1. Lambda and DynamoDB:
