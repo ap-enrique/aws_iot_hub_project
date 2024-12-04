@@ -1,4 +1,4 @@
-# Temperature and Humidity Monitoring with Arduino, MQTT, and AWS IoT Core
+# Temperature and Humidity Monitoring with Arduino, Raspberry Pi, and AWS IoT Core
 
 ![IoT project overview](img/Portofolio.drawio.png)
 
@@ -6,14 +6,16 @@
 
 1. Overview
 2. Introduction
-3. Components
+3. Project Components
+4. System Architecture
 4. Instructions
-	- Step 1: Downloads
-	- Step 2: Connectivity
-	- Step 3: Data Analysis and Statistics
-5. Security
-6. Scalability
-7. Conclusion
+	- Step 1: Installation adn Configuration
+	- Step 2: Wiring
+	- Step 3: MQTT Setup
+	- Step 4: Data Transmission to AWS IoT Core
+6. Security
+7. Scalability
+8. Conclusion and Future Work
 
 
 ## Overview
@@ -24,14 +26,23 @@ The aim of this project is to showcase the use of IoT devices for gathering and 
 
 This solution is scalable and can be enhanced with more sensors and devices to develop a complete IoT system.
 
-## Components
-- Arduino Uno R4 WiFi: A microcontroller designed for reading sensor data and communicating through MQTT.
-- DHT11 Sensor: A device that measures temperature and humidity.
-- Raspberry Pi: Acts as the MQTT broker and serves as an intermediary to forward data to AWS IoT Core.
-- AWS IoT Core: A service that manages IoT devices and their data.
-- AWS DynamoDB: A database used for storing sensor readings.
-- AWS Lambda: A serverless function that processes data and facilitates communication between IoT Core and DynamoDB.
-- AWS Amplify: A tool for creating a web interface to visualize sensor data.
+## Project Components
+- Hardware
+	- Arduino Uno R4 WiFi: A microcontroller designed for reading sensor data and communicating through MQTT.
+	- DHT11 Sensor: A device that measures temperature and humidity.
+	- Raspberry Pi: Acts as the MQTT broker and serves as an intermediary to forward data to AWS IoT Core.
+ - Software
+ 	- Arduino IDE
+ 	- MQTT Libraries
+  	- AWS service
+		- AWS IoT Core: A service that manages IoT devices and their data.
+		- AWS DynamoDB: A database used for storing sensor readings.
+		- AWS Lambda: A serverless function that processes data by sending over to other applications..
+		- AWS Amplify: A tool for creating a web interface to visualize sensor data.
+
+## System Architecture
+- DHT11 Sensor → Arduino → MQTT Broker (Raspberry Pi) → AWS IoT Core → DynamoDB
+- Visualization happens via AWS Amplify and a Lambda function to build a simple web interface.
 
 ## Instructions
 ### Steg 1: Downloads
@@ -58,7 +69,7 @@ This solution is scalable and can be enhanced with more sensors and devices to d
 	- In main.ino, configure your MQTT server (Raspberry Pi’s IP address) and Wi-Fi settings (SSID and password).
 	- Use the PubSubClient library to connect to the MQTT server and publish temperature and humidity data.
 
-![Raspberry Pi](img/Raspberry pi.png)
+![Raspberry Pi](img/Raspberry_pi.png)
 
 3. Configure MQTT Broker on Raspberry Pi:
 	- Install Mosquitto and configure it to listen for incoming MQTT messages from the Arduino.
