@@ -4,7 +4,7 @@
 #include <ArduinoJson.h>
 #include "arduino_secrets.h" // För WiFi- och MQTT-uppgifter
 
-// Konstanter och inställningar
+// Inställningar
 #define DHTPIN 2           // Pin var sensorn är ansluten
 #define DHTTYPE DHT11      // Typ av sensor
 #define SENSOR_READ_INTERVAL 10000 // Delay mellan avläsningar i millisekunder
@@ -44,14 +44,17 @@ void connectToWiFi() {
     byte mac[6];
     WiFi.macAddress(mac);  // Get MAC address
 
-    // Convert MAC address to String (without colons)
+    // Convert MAC address to String (without colons) and set as THINGNAME
     THINGNAME = "";
     for (int i = 0; i < 6; i++) {
         THINGNAME += String(mac[i], HEX);
     }
 
+    // Ensure the MAC address is in uppercase
+    THINGNAME.toUpperCase();
+
     Serial.print("MAC-adress: ");
-    printMacAddress(mac); // This function still takes byte array as argument
+    Serial.println(THINGNAME); // Print the device's unique ID (THINGNAME)
 }
 
 void setupMQTT(MQTTClient& client, WiFiClient& net) {
@@ -76,40 +79,23 @@ void mqttLoop(MQTTClient& client) {
     client.loop();
 }
 
-void sendToMQTT(MQTTClient& client, float temperature, float humidity, String status) {
-    // Skicka temperatur
-    StaticJsonDocument<256> tempDoc;
-    tempDoc["device_id"] = THINGNAME;  // Use device's MAC address as ID
-    tempDoc["temperature"] = temperature;
-    char tempBuffer[256];
-    serializeJson(tempDoc, tempBuffer);
-    client.publish(AWS_IOT_PUBLISH_TOPIC, tempBuffer);
+void sendToMQTT(MQTTClient& client, float temperature, float humidity) {
+    // Dynamically create the topic with the device's unique THINGNAME
+    String topic = String(AWS_IOT_PUBLISH_TOPIC) + "/" + THINGNAME;
 
-    // Skicka luftfuktighet
-    StaticJsonDocument<256> humDoc;
-    humDoc["device_id"] = THINGNAME;
-    humDoc["humidity"] = humidity;
-    char humBuffer[256];
-    serializeJson(humDoc, humBuffer);
-    client.publish(AWS_IOT_PUBLISH_TOPIC, humBuffer);
-
-    // Skicka status
-    StaticJsonDocument<256> statusDoc;
-    statusDoc["device_id"] = THINGNAME;
-    statusDoc["status"] = status;
-    char statusBuffer[256];
-    serializeJson(statusDoc, statusBuffer);
-    client.publish(AWS_IOT_PUBLISH_TOPIC, statusBuffer);
-
-    // Skicka sammanställd data till "telemetry"
+    // Create the JSON payload
     StaticJsonDocument<512> telemetryDoc;
-    telemetryDoc["device_id"] = THINGNAME;
+    telemetryDoc["device_id"] = THINGNAME;  // Use device's MAC address as ID
     telemetryDoc["temperature"] = temperature;
     telemetryDoc["humidity"] = humidity;
-    telemetryDoc["status"] = status;
     char telemetryBuffer[512];
     serializeJson(telemetryDoc, telemetryBuffer);
-    client.publish(AWS_IOT_PUBLISH_TOPIC, telemetryBuffer);
+
+    // Publish to the dynamically generated topic
+    client.publish(topic.c_str(), telemetryBuffer);
+
+    Serial.print("Skickar JSON till MQTT: ");
+    Serial.println(telemetryBuffer); // Print the JSON payload for debugging
 }
 
 void messageReceived(String &topic, String &payload) {
@@ -137,13 +123,12 @@ bool readSensorData(DHT& dht, float& temperature, float& humidity) {
     return true;
 }
 
-void printDataToSerial(float temperature, float humidity, String status) {
+void printDataToSerial(float temperature, float humidity) {
     Serial.print("Temperatur: ");
     Serial.print(temperature);
     Serial.print(" °C, Luftfuktighet: ");
     Serial.print(humidity);
-    Serial.print(" %, Status: ");
-    Serial.println(status);
+    Serial.println(" %");
 }
 
 // Setup och loop
@@ -165,11 +150,10 @@ void loop() {
     mqttLoop(mqttClient);
 
     float temperature, humidity;
-    String status = "on"; // För test kan vi låta status vara "on" som standard
 
     if (readSensorData(dht, temperature, humidity)) {
-        printDataToSerial(temperature, humidity, status);
-        sendToMQTT(mqttClient, temperature, humidity, status);
+        printDataToSerial(temperature, humidity);
+        sendToMQTT(mqttClient, temperature, humidity);
     }
 
     delay(SENSOR_READ_INTERVAL);
