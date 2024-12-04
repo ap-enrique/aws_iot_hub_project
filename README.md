@@ -1,5 +1,7 @@
 # Temperature and Humidity Monitoring with Arduino, MQTT, and AWS IoT Core
 
+![IoT project overview](img/Portofolio.drawio.png)
+
 ## Table of Contents
 
 1. Overview
@@ -45,6 +47,9 @@ This solution is scalable and can be enhanced with more sensors and devices to d
 	- Follow the AWS IoT Core documentation to configure and install the AWS CLI.
 
 ### Steg 2: Connectivity
+
+![Arduino and DHT11 Setup](img/Arduino_DHT11_Setup.png)
+
 1. Koppla DHT11 till Arduino Uno R4 WiFi:
 	- VCC to 5V.
 	- SDA to pin 2.
