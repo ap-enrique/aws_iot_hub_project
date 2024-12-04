@@ -48,7 +48,7 @@ This solution is scalable and can be enhanced with more sensors and devices to d
 
 ### Steg 2: Connectivity
 
-
+![Arduino and DHT11 Setup](img/Arduino_DHT11_Setup.png)
 
 1. Koppla DHT11 till Arduino Uno R4 WiFi:
 	- VCC to 5V.
@@ -57,6 +57,9 @@ This solution is scalable and can be enhanced with more sensors and devices to d
 2. Configure MQTT in Arduino Code:
 	- In main.ino, configure your MQTT server (Raspberry Pi’s IP address) and Wi-Fi settings (SSID and password).
 	- Use the PubSubClient library to connect to the MQTT server and publish temperature and humidity data.
+
+![Raspberry Pi](img/Raspberry pi.png)
+
 3. Configure MQTT Broker on Raspberry Pi:
 	- Install Mosquitto and configure it to listen for incoming MQTT messages from the Arduino.
 	- Create subscriptions for the specific topics published by the Arduino.
