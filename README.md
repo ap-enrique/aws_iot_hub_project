@@ -6,10 +6,10 @@
 
 1. [Overview](#overview)
 2. [Introduction](#introduction)
-3. Project Components
-4. System Architecture
-4. Instructions
-	- Step 1: Installation and Configuration
+3. [Project Components](#project-components)
+4. [System Architecture](#system-architecture)
+4. [Instructions](#instructions)
+	- [Step 1: Installation and Configuration](#step-1-installation-and-configuration)
 	- Step 2: Wiring
 	- Step 3: Connectivity
 	- Step 4: Data Transmission to AWS IoT Core
@@ -65,9 +65,6 @@ This IoT project focuses on real-time monitoring of temperature and humidity usi
 		- PubSubClient (for MQTT communication).
 3. Install MQTT Broker on Raspberry Pi:
 	- Install an MQTT broker such as Mosquitto on your Raspberry Pi.
-4. Install AWS CLI and IoT Core SDK:
-	- Follow the AWS IoT Core documentation to configure and install the AWS CLI.
-5. 
 
 ### Step 2: Wiring
 
