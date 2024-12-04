@@ -75,10 +75,10 @@ Connect to the DHT11 to the Arduino Uno R4 WiFi as follow:
 
 2. Configure MQTT Broker on Raspberry Pi:
 	- Install Mosquitto and configure it to listen for incoming MQTT messages from the Arduino.
-	```
-	sudo apt-get update  
-	sudo apt-get install mosquitto mosquitto-clients 
-	```
+    	```
+     	sudo apt-get update
+     	sudo apt-get install mosquitto mosquitto-clients
+     	```
 	- Configure the MQTT broker for the local network.
  	- Use the following configuration in main.ino
     	```
