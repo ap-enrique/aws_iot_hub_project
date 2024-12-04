@@ -10,14 +10,14 @@
 4. [System Architecture](#system-architecture)
 4. [Instructions](#instructions)
 	- [Step 1: Installation and Configuration](#step-1-installation-and-configuration)
-	- Step 2: Wiring
-	- Step 3: Connectivity
-	- Step 4: Data Transmission to AWS IoT Core
-	- Step 5: Data Visualization
-6. Security
-7. Scalability
-8. Conclusion
-9. Future Work
+	- [Step 2: Wiring](#step-2-wiring)
+	- [Step 3: Connectivity](#step-3-connectivity)
+	- [Step 4: Data Transmission to AWS IoT Core](#step-4-data-transmission-to-aws-iot-core)
+	- [Step 5: Data Visualization](#step-5-data-visualization)
+6. [Security](#security)
+7. [Scalability](#scalability)
+8. [Conclusion](#conclusion)
+9. [Future Work](#future-work)
 
 
 ## Overview
@@ -57,13 +57,13 @@ This IoT project focuses on real-time monitoring of temperature and humidity usi
 
 ## Instructions
 ### Step 1: Installation and Configuration
-1. Install Arduino IDE:
+- Install Arduino IDE:
 	- Download and install the latest version of the Arduino IDE.
-2. Install Libraries:
+- Install Libraries:
 	- In Arduino IDE, go to Sketch > Include Library > Manage Libraries and search for the following libraries:
 		- DHT sensor library (for reading from the DHT11 sensor).
 		- PubSubClient (for MQTT communication).
-3. Install MQTT Broker on Raspberry Pi:
+- Install MQTT Broker on Raspberry Pi:
 	- Install an MQTT broker such as Mosquitto on your Raspberry Pi.
 
 ### Step 2: Wiring
@@ -72,7 +72,7 @@ This IoT project focuses on real-time monitoring of temperature and humidity usi
 Connect to the DHT11 to the Arduino Uno R4 WiFi as follow:
 	- VCC → 5V on Arduino
 	- SDA → Pin 2 on Arduino
-	 - GND → GND on Arduino
+	- GND → GND on Arduino
   
 ### Step 3: Connectivity
 1. Configure MQTT in Arduino Code:
@@ -94,9 +94,12 @@ Connect to the DHT11 to the Arduino Uno R4 WiFi as follow:
      	```
 	- Create subscriptions for the specific topics published by the Arduino.
 
-### Step 3: Data Transmission to AWS IoT Core
+### Step 4: Data Transmission to AWS IoT Core
 - Configure the Raspberry Pi to forward MQTT messages to AWS:
+	- Register your device (Raspberry Pi) in AWS IoT Core.
+ 	- Download the device certificates.
 	- Establish a secure connection using certificates.
+ 	- Attach an IoT policy that allows publishing to a specific topic.
  	- Send data in JSON format with the following structure:
     	```
      	{
@@ -111,13 +114,8 @@ Connect to the DHT11 to the Arduino Uno R4 WiFi as follow:
 	- Create a DynamoDB Table to store the data
 	- Use AWS IoT Core to create a rule that publishes sensor data to DynamoDB when MQTT messages are received.
 	- Configure a Lambda function for data handling
+ 		- Create an AWS Lambda function to handle incoming MQTT messages and write them to a DynamoDB table.
  	- Deploy a website using AWS Amplify
-
-### Step 4: Statistik och Dataanalys
-1. Lambda and DynamoDB:
-	- Create an AWS Lambda function to handle incoming MQTT messages and write them to a DynamoDB table.
-2. Visualization with AWS Amplify:
-	- Build a web interface with AWS Amplify to visualize temperature and humidity data from DynamoDB.
 
 ### Step 5: Data Visualization
 - You can visualize the collected data for both industrial and home users
