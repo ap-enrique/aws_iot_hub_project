@@ -103,7 +103,7 @@ Connect to the DHT11 to the Arduino Uno R4 WiFi as follow:
  	- Send data in JSON format with the following structure:
     	```
      	{
-  		"device_id": "MAC_ADDRESS",
+  		"device": "MAC_ADDRESS",
   		"temperature": 24.2,
   		"humidity": 34
      	}
