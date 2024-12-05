@@ -70,9 +70,9 @@ This IoT project focuses on real-time monitoring of temperature and humidity usi
 
 ![Arduino and DHT11 Setup](img/Arduino_DHT11_Setup.png)
 Connect to the DHT11 to the Arduino Uno R4 WiFi as follow:
-	- VCC → 5V on Arduino
-	- SDA → Pin 2 on Arduino
-	- GND → GND on Arduino
+- VCC → 5V on Arduino
+- SDA → Pin 2 on Arduino
+- GND → GND on Arduino
   
 ### Step 3: Connectivity
 1. Configure MQTT in Arduino Code:
