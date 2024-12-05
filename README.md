@@ -126,7 +126,7 @@ Connect to the DHT11 to the Arduino Uno R4 WiFi as follow:
 		- Industrial users can monitor multiple sensors and locations with alerts for critical conditions
 
 ![Grafana Humidity](img/Grafana_Humidity.png)
-![Grafana Temperature](img/Grafana_Temperature.png)
+![Grafana Temperature](img/Grafana_Tempereture.png)
 ![Grafana Dashboard](img/Grafana_Dashboard.png)
 
 - Amplify provides a simple, user-friendly web interface, making it perfect for home users who need easy access to data from any device.
