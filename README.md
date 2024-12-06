@@ -163,8 +163,8 @@ Connect to the DHT11 to the Arduino Uno R4 WiFi as follow:
 	- Customize the UI to show real-time temperature and humidity updates.
  	- Usage:
 		- Home users can log in to a web portal and view current conditions, historical data, and basic analytics.
-![Wepage visualization on PC webbrowser with React app and Amplify](img/webbrowser_screenshoot.png)
-![Mobile phone visualization on Phone webbrowser with React app and Amplify](img/mobile_screenshoot.jpg)
+![Wepage visualization on PC webbrowser with React app and Amplify](img/Webbrowser_screenshoot.png)
+![Mobile phone visualization on Phone webbrowser with React app and Amplify](img/Mobile_screenshoot.jpg)
 
 ### Security
 - Protect sensitive data: Use arduino_secrets.h to store WiFi credentials and certificates.
