@@ -16,7 +16,7 @@ import {
 // Registrera de nödvändiga komponenterna
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Title, Tooltip, Legend);
 
-const API_URL = 'https://rep1xcr4ol.execute-api.eu-north-1.amazonaws.com/amplify_api_stage/Items';
+const API_URL = 'https://API-GATEWAY-URL-HERE';
 
 const TelemetryChart = () => {
   const [tempChartData, setTempChartData] = useState({});
