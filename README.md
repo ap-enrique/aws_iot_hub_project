@@ -167,7 +167,7 @@ Connect to the DHT11 to the Arduino Uno R4 WiFi as follow:
 ![Mobile phone visualization on Phone webbrowser with React app and Amplify](img/Mobile_screenshoot.jpg)
 
 ### Security
-- Protect sensitive data: Use arduino_secrets.h to store WiFi credentials and certificates.
+- Protect sensitive data: Use `arduino_secrets.h` and `pi_secrets.py`.
 - Secure MQTT connections using TLS certificates.
 - Use AWS IoT Core to manage authentication and authorization between all devices (Arduino, Raspberry Pi, and AWS services).
 
@@ -176,7 +176,9 @@ Connect to the DHT11 to the Arduino Uno R4 WiFi as follow:
 - Use AWS IoT Core rules to handle larger data volumes from multiple devices.
 
 ### Conclusion
-This project showcases how basic IoT components such as the Arduino and Raspberry Pi can be utilized to develop a scalable and secure system for monitoring environmental data. By using MQTT, AWS IoT Core, DynamoDB, and AWS Amplify, a comprehensive solution is established to gather, store, and visualize sensor data in real-time. The project is designed to be easily expandable and customizable, allowing for the inclusion of more sensors and devices.
+This project demostrate how basic IoT components such as the Arduino and Raspberry Pi can be utilized to develop a scalable and secure system for monitoring environmental data. By using MQTT, AWS IoT Core, DynamoDB, and AWS Amplify, a comprehensive solution is established to gather, store, and visualize sensor data in real-time. The project is designed to be easily expandable and customizable, allowing for the inclusion of more sensors and devices.
 
 ### Future Work
-Future development includes creating a mobile app for real-time monitoring.
+1. Mobile App Development: Build an app for easier monitoring on the go.
+2. Machine Learning: Use historical data for predictive analytics.
+3. Extended Sensor Network: Add sensors for air quality or light levels.
