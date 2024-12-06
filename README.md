@@ -21,10 +21,13 @@
 
 
 ## Overview
-This project uses an Arduino Uno R4 WiFi along with a DHT11 sensor to monitor temperature and humidity levels. The data collected by the sensor is transmitted via MQTT to a Raspberry Pi, which serves as the MQTT broker. The Raspberry Pi subsequently sends the data to AWS IoT Core, where it is stored in a DynamoDB table and displayed on a web page created with AWS Amplify. This configuration allows for remote monitoring of sensor data and lays a solid foundation for future enhancements.
+This project uses an Arduino Uno R4 WiFi along with a DHT11 sensor to monitor temperature and humidity levels. The data collected by the sensor is transmitted via MQTT to a Raspberry Pi, which serves as the MQTT broker. The Raspberry Pi subsequently sends the data to AWS IoT Core, where it is stored in a DynamoDB table and displayed on a web page created with AWS Amplify. This configuration allows for remote monitoring of sensor and visualized using AWS Amplify and Grafana. The architecture is designed for scalability and secure operations, and lays a solid foundation for future enhancements.
 
 ## Introduction
-This IoT project focuses on real-time monitoring of temperature and humidity using an Arduino Uno R4 WiFi paired with a DHT11 sensor. The system utilizes MQTT for transmitting data to a Raspberry Pi, which subsequently sends the information to AWS IoT Core for storage and visualization.
+### Purpose
+- This IoT project focuses on real-time monitoring of temperature and humidity using an Arduino Uno R4 WiFi paired with a DHT11 sensor.
+- The system utilizes MQTT for transmitting data to a Raspberry Pi, which subsequently sends the information to AWS IoT Core for storage and visualization.
+- Build a scalable, secure, and user-friendly system for cloud-based visualization and analytics.
 
 ### Who Can Use This Project?
 - Home Users: Keep track of indoor environments, including home climate, greenhouses, or server rooms.
@@ -39,21 +42,29 @@ This IoT project focuses on real-time monitoring of temperature and humidity usi
 
 ## Project Components
 - Hardware
-	- Arduino Uno R4 WiFi: A microcontroller designed for reading sensor data and communicating through MQTT.
+	- Arduino Uno R4 WiFi: A microcontroller designed for reading sensor, collects data and communicating through MQTT.
 	- DHT11 Sensor: A device that measures temperature and humidity.
 	- Raspberry Pi: Acts as the MQTT broker and serves as an intermediary to forward data to AWS IoT Core.
  - Software
- 	- Arduino IDE
- 	- MQTT Libraries
+ 	- Arduino IDE for programming the Arduino.
+ 	- Mosquitto MQTT Broker on Raspberry Pi for data relay.
   	- AWS service
-		- AWS IoT Core: A service that manages IoT devices and their data.
+		- AWS IoT Core: A cloud communication service that manages IoT devices and their data.
 		- AWS DynamoDB: A database used for storing sensor readings.
-		- AWS Lambda: A serverless function that processes data by sending over to other applications..
-		- AWS Amplify: A tool for creating a web interface to visualize sensor data.
+		- AWS Lambda: A serverless function that processes data by sending over to other applications.
+		- AWS Amplify: A tool for creating a frontend web interface to visualize sensor data.
+		- Grafana för advanced dashboard capabilities.
 
 ## System Architecture
-- DHT11 Sensor → Arduino → MQTT Broker (Raspberry Pi) → AWS IoT Core → DynamoDB
-- Visualization happens via AWS Amplify and a Lambda function to build a simple web interface.
+### Data Flow
+- DHT11 Sensor → Arduino Uno R4 Wifi
+- Arduino → MQTT Broker (Raspberry Pi)
+- Raspberry Pi → AWS IoT Core
+- AWS IoT Core → DynamoDB and Amplify
+
+### Visualization Options
+1. Grafana: Real-time, multi-sensor dashboards for industrial use.
+2. AWS Amplify: A user-friendly web portal for home monitoring.
 
 ## Instructions
 ### Step 1: Installation and Configuration
