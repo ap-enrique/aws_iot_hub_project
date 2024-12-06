@@ -1,0 +1,26 @@
+const AWS = require('aws-sdk');
+const dynamodb = new AWS.DynamoDB.DocumentClient();
+
+exports.handler = async (event) => {
+    console.log("Event: ", JSON.stringify(event));
+
+    const payload = JSON.parse(event.payload);
+
+    const params = {
+        TableName: 'TABLE-NAME',
+        Item: {
+            device: payload.device,
+            timestamp: Date.now(),
+            temperature: payload.temperature,
+            humidity: payload.humidity
+        }
+    };
+
+    try {
+        await dynamodb.put(params).promise();
+        return { statusCode: 200, body: 'Data inserted successfully' };
+    } catch (error) {
+        console.error(error);
+        return { statusCode: 500, body: 'Failed to insert data' };
+    }
+};
