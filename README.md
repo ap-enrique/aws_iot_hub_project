@@ -74,8 +74,13 @@ This project uses an Arduino Uno R4 WiFi along with a DHT11 sensor to monitor te
 	- In Arduino IDE, go to Sketch > Include Library > Manage Libraries and search for the following libraries:
 		- DHT sensor library (for reading from the DHT11 sensor).
 		- PubSubClient (for MQTT communication).
+  		- ArduinoJson
 - Install MQTT Broker on Raspberry Pi:
 	- Install an MQTT broker such as Mosquitto on your Raspberry Pi.
+	```
+ 	sudo apt-get update
+ 	sudo apt-get install mosquitto mosquitto-clients
+ 	``` 
 
 ### Step 2: Wiring
 
@@ -87,8 +92,17 @@ Connect to the DHT11 to the Arduino Uno R4 WiFi as follow:
   
 ### Step 3: Connectivity
 1. Configure MQTT in Arduino Code:
-	- In main.ino, configure your MQTT server (Raspberry Pi’s IP address) and Wi-Fi settings (SSID and password).
+	- In main.ino, configure your MQTT server (Raspberry Pi’s IP address) and Wi-Fi settings (SSID and password) at (`arduino_secrets.h`). 
 	- Use the PubSubClient library to connect to the MQTT server and publish temperature and humidity data.
+	- Ensure data is sent in JSON format
+
+	```
+ 	{
+ 		"device": "MAC_ADDRESS",
+  		"temperature": 24.2,
+  		"humidity": 34
+ 	}
+	```
 
 ![Raspberry Pi](img/Raspberry_pi.png)
 
