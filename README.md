@@ -120,10 +120,11 @@ Connect to the DHT11 to the Arduino Uno R4 WiFi as follow:
 	- Create subscriptions for the specific topics published by the Arduino.
 
 ### Step 4: Data Transmission to AWS IoT Core
-- Configure the Raspberry Pi to forward MQTT messages to AWS:
+- AWS IoT Core Setup:
+	- Configure the Raspberry Pi to forward MQTT messages to AWS
 	- Register your device (Raspberry Pi) in AWS IoT Core.
  	- Download the device certificates.
-	- Establish a secure connection using certificates.
+	- Establish a secure connection using policies and certificates.
  	- Attach an IoT policy that allows publishing to a specific topic.
  	- Send data in JSON format with the following structure:
     	```
@@ -137,15 +138,17 @@ Connect to the DHT11 to the Arduino Uno R4 WiFi as follow:
 	- Set up AWS IoT Core
 	- Create an IoT thing and obtain the necessary certificates and keys.
 	- Create a DynamoDB Table to store the data
-	- Use AWS IoT Core to create a rule that publishes sensor data to DynamoDB when MQTT messages are received.
+ 		- Create a table with `device_id` (Partition Key) and `timestamp` (Sort Key).
+	- Use AWS IoT Core to create a rule that allow writing publishes sensor data to DynamoDB when MQTT messages are received.
 	- Configure a Lambda function for data handling
- 		- Create an AWS Lambda function to handle incoming MQTT messages and write them to a DynamoDB table.
- 	- Deploy a website using AWS Amplify
+ 		- Create an AWS Lambda function to handle incoming MQTT messages.
+   		- Write a Node.js function to handle data insertion into DynamoDB table
+     		- Create an AWS Lambda function to handle http get requet.
 
 ### Step 5: Data Visualization
 - You can visualize the collected data for both industrial and home users
 - Grafana is ideal for industrial use cases due to its real-time monitoring capabilities and ability to handle complex dashboards with multiple data sources.
-	- Configure Grafana to pull data from AWS IoT Core or DynamoDB using a plugin or custom integration.
+	- Configure Grafana to pull data from AWS IoT Core or DynamoDB using a infinity plugin or custom integration.
 	- Create dashboards to visualize temperature and humidity trends over time.
  	- Usage:
 		- Industrial users can monitor multiple sensors and locations with alerts for critical conditions
@@ -160,6 +163,8 @@ Connect to the DHT11 to the Arduino Uno R4 WiFi as follow:
 	- Customize the UI to show real-time temperature and humidity updates.
  	- Usage:
 		- Home users can log in to a web portal and view current conditions, historical data, and basic analytics.
+![Wepage visualization on PC webbrowser with React app and Amplify](!img/webbrowser_screenshoot.png)
+![Mobile phone visualization on Phone webbrowser with React app and Amplify](!img/Mobile_screenshoot.jpg)
 
 ### Security
 - Protect sensitive data: Use arduino_secrets.h to store WiFi credentials and certificates.
