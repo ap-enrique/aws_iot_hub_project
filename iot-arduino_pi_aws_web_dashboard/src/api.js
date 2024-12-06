@@ -1,4 +1,4 @@
-const API_URL = 'https://rep1xcr4ol.execute-api.eu-north-1.amazonaws.com/amplify_api_stage/Items';
+const API_URL = ' https://"API-URL-HERE" ';
 
 export async function fetchItems() {
   try {
