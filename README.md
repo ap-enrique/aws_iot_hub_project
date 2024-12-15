@@ -13,7 +13,8 @@
 	- [Step 2: Wiring](#step-2-wiring)
 	- [Step 3: Connectivity](#step-3-connectivity)
 	- [Step 4: Data Transmission to AWS IoT Core](#step-4-data-transmission-to-aws-iot-core)
-	- [Step 5: Data Visualization](#step-5-data-visualization)
+	- [Step 5: Data Storage](#step-5-data-storage)
+	- [Step 6: Data Visualization](#step-6-data-visualization)
 6. [Security](#security)
 7. [Scalability](#scalability)
 8. [Conclusion](#conclusion)
@@ -145,7 +146,33 @@ Connect to the DHT11 to the Arduino Uno R4 WiFi as follow:
    		- Write a Node.js function to handle data insertion into DynamoDB table
      		- Create an AWS Lambda function to handle http get requet.
 
-### Step 5: Data Visualization
+## Step 5: Data Storage
+- DynamoDB is used in this project for storing real-time sensor data.
+	- Dynamo is good for the project because of the low-latency for reads and writes.
+	- Automatically scales to handle spikes in traffic.
+	- Works well for unstructured or semi-structured data like JSON
+	- DynamoDB integrates seamlessly with AWS IoT Core rules, allowing automatic data insertion without additional infrastructure.
+- Amazon S3 can also be employed as a supplementary or alternative storage option.
+	- Long-term storage of historical data or logs.
+	- Central repository for structured and unstructured data for analytics.
+	- Hosting static files like HTML, CSS, and JavaScript.
+	- Storing connect/disconnect events or debugging logs for IoT devices.
+ 	- Storing images, videos, or other multimedia content.
+- Although S3 is not implemented in this project, it remains a viable option for future enhancements where long-term storage or event logging is required.
+- Other Storage Options
+	- AWS Options
+		- Amazon RDS
+		- Amazon Redshift
+		- Amazon Timestream
+		- Amazon Elasticsearch/OpenSearch
+		- AWS Glue Data Catalog
+  	- Others
+		- InfluxDB
+  		- MongoDB
+  	 	- Google Cloud Storage
+  	  	- SQLite or Local File Storage
+
+### Step 6: Data Visualization
 - You can visualize the collected data for both industrial and home users
 - Grafana is ideal for industrial use cases due to its real-time monitoring capabilities and ability to handle complex dashboards with multiple data sources.
 	- Configure Grafana to pull data from AWS IoT Core or DynamoDB using a infinity plugin or custom integration.
